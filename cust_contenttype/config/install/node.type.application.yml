@@ -1,0 +1,15 @@
+# node.type.application.yml
+# Defining the content type named application in the module named custom_contenttype
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cust_contenttype # This is the name of the module we're using for this example
+name: 'Application'
+type: application
+description: 'Content type that can be used to provide additional information on <em>Custom Application</em>'
+help: ''
+new_revision: false
+preview_mode: 1
+display_submitted: true

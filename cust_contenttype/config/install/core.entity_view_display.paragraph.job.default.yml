@@ -1,0 +1,29 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.job.employer_name
+    - field.field.paragraph.job.employment_years
+    - paragraphs.paragraphs_type.job
+id: paragraph.job.default
+targetEntityType: paragraph
+bundle: job
+mode: default
+content:
+  employer_name:
+    type: string
+    weight: 0
+    region: content
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  employment_years:
+    type: string
+    weight: 1
+    region: content
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+hidden: {  }

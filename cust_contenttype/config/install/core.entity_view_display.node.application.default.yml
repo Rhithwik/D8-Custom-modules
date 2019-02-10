@@ -1,0 +1,40 @@
+# core.entity_view_display.node.application.default.yml
+# Defining the view mode for content created using the content type named application 
+# in the module named custom_contenttype
+langcode: en
+status: true
+dependencies:
+    config:
+        - field.field.node.application.body
+        - field.field.node.application.employment_history
+        - node.type.application
+    module:
+        - entity_reference_revisions
+        - text
+        - user
+id: node.application.default
+targetEntityType: node
+bundle: application
+mode: default
+content:
+    body:
+        label: hidden
+        type: text_default
+        weight: 101
+        settings:
+            view_mode: default
+        third_party_settings: {  }
+    employment_history:
+        type: entity_reference_revisions_entity_view
+        weight: 2
+        region: content
+        label: above
+        settings:
+          view_mode: default
+          link: ''
+        third_party_settings: {  }
+    links:
+        weight: 100    
+        settings: {  }
+        third_party_settings: {  }
+hidden: {  }

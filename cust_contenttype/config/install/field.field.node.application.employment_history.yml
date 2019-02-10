@@ -1,0 +1,32 @@
+# field.field.node.application.body.yml
+# Defining the field body for content type named application in the module named custom_contenttype
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.employment_history
+    - node.type.application
+    - paragraphs.paragraphs_type.job
+  module:
+    - entity_reference_revisions
+id: node.application.employment_history
+field_name: employment_history
+entity_type: node
+bundle: application
+label: 'Employment history'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      job: job
+    target_bundles_drag_drop:
+      job:
+        enabled: true
+        weight: 2
+field_type: entity_reference_revisions

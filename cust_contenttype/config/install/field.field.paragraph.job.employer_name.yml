@@ -1,0 +1,22 @@
+# field.field.paragraphs.job.employer_name.yml
+# Defining the field employer_name for paragraph type named job in the module named custom_contenttype
+langcode: en
+status: true
+dependencies:
+    config:
+        - field.storage.paragraph.employer_name
+        - paragraphs.paragraphs_type.job
+    module:
+        - text
+id: paragraph.job.employer_name
+field_name: employer_name
+entity_type: paragraph
+bundle: job
+label: Employer name
+description: 'Elaborate the job.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

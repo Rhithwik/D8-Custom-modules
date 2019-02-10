@@ -1,0 +1,22 @@
+# field.storage.paragraphs.job.employment_years.yml
+# Defining the field employment_years storage for paragraph type named job in the module named custom_contenttype
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+id: paragraph.employment_years
+field_name: employment_years
+entity_type: paragraph
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

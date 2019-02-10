@@ -1,0 +1,12 @@
+# paragraphs.type.job.yml
+# Defining the paragraph type named application in the module named custom_contenttype
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cust_contenttype # This is the name of the module we're using for this example
+label: 'Job'
+id: job
+description: 'Paragraph type that can be used to provide additional information on <em>Custom Application</em>'
+behavior_plugins: {  }

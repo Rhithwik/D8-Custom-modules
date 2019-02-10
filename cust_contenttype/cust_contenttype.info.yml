@@ -1,0 +1,15 @@
+name: 'Custom Content'
+description: 'Defines custom content type and paragraph'
+package: Custom
+type: module
+# core: 8.x
+# version: VERSION
+
+dependencies:
+  - node
+  - paragraphs
+
+version: '8.x-1.1'
+core: '8.x'
+project: 'cust_contenttype'
+datestamp: 1525039388
