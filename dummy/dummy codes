@@ -1,0 +1,733 @@
+f_name
+l_name
+email
+driver_license
+birth_date
+cell_phone
+
+curr_in_date
+curr_rent
+curr_landloard_name
+curr_landloard_number
+curr_reason
+curr_address
+curr_city//
+curr_state
+curr_zip
+
+prev_in_date
+prev_out_date
+prev_rent
+prev_landloard_name
+prev_landloard_number
+prev_reason
+prev_address
+prev_city
+prev_state
+prev_zip
+
+occupation
+employer_name
+employer_number
+employment_year
+
+family_fieldset
+ family_member_name
+ family_member_age
+ family_member_rel
+
+income_fieldset
+ income_source
+ income_value
+income
+
+ref_fieldset
+ ref_name
+ ref_relation
+ ref_phone
+ ref_email
+----------------------------------
+<?php
+
+namespace Drupal\applicationmang\Form;
+
+
+use Drupal\Core\Form\FormBase;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Tests\user\Kernel;
+use \Drupal\node\Entity\Node;
+use Drupal\paragraphs\Entity\Paragraph;
+
+/**
+ * Implements the SimpleForm form controller.
+ *
+ * This example demonstrates a simple form with a singe text input element. We
+ * extend FormBase which is the simplest form base class used in Drupal.
+ *
+ * @see \Drupal\Core\Form\FormBase
+ */
+class ApplyPropertyForm extends FormBase {
+  /**
+   * Build the simple form.
+   *
+   * A build form method constructs an array that defines how markup and
+   * other form elements are included in an HTML form.
+   *
+   * @param array $form
+   *   Default form array structure.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   Object containing current form state.
+   *
+   * @return array
+   *   The render array defining the elements of the form.
+   */
+  public function buildForm(array $form, FormStateInterface $form_state, $propertyid = NULL) {
+    if (\Drupal::currentUser()->isAnonymous()) {
+      $form['login'] = [
+        '#markup' => '<h3>Please login to get in touch!</h3>',
+      ];
+    } else {
+
+   $config = $this->config('system.site');
+    // Display apply form:
+    $form['f_name'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('First Name'),
+      '#description' => $this->t('Enter your first name.'),
+      '#required' => TRUE,
+    ];
+    $form['l_name'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Last Name'),
+      '#description' => $this->t('Enter your last name.'),
+      '#required' => TRUE,
+    ];
+    $form['email'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Email'),
+      '#size' => 60,
+      '#maxlength' => USERNAME_MAX_LENGTH,
+      '#description' => $this->t('Enter your email id which will be your user name by default for @s.', ['@s' => $config->get('name')]),
+      '#required' => TRUE,
+      '#attributes' => [
+        'autocorrect' => 'none',
+        'autocapitalize' => 'none',
+        'spellcheck' => 'false',
+        'autofocus' => 'autofocus',
+      ],
+    ];
+    $form['driver_license'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Driver license'),
+      '#description' => $this->t('Enter your driver license number.'),
+      '#required' => TRUE,
+    ];
+    $form['birth_date'] = [
+      '#type' => 'date',
+      '#title' => $this->t('Birth date'),
+      '#description' => $this->t('Enter your birth date.'),
+    ];
+    $form['cell_phone'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Cell phone'),
+    ];
+  
+    $form['curr_in_date'] = [
+      '#type' => 'date',
+      '#title' => $this->t('Movin date'),
+      '#description' => $this->t('Enter your driver license number.'),
+    ];
+    $form['curr_rent'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Rent'),
+    ];
+    $form['curr_landloard_name'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Landloard Name'),
+    ];
+    $form['curr_landloard_number'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Landloard phone number'),
+    ];
+    $form['curr_reason'] = [
+      '#type' => 'textarea',
+      '#title' => $this->t('Reason for leaving'),
+    ];
+    $form['curr_address'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Address'),
+    ];
+    $form['curr_city'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('City'),
+    ];
+    $form['curr_state'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('State'),
+    ];
+    $form['curr_zip'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Zip code'),
+    ];
+
+
+    $form['prev_in_date'] = [
+      '#type' => 'date',
+      '#title' => $this->t('Movin date'),
+      '#description' => $this->t('Enter your in date.'),
+    ];
+    $form['prev_out_date'] = [
+      '#type' => 'date',
+      '#title' => $this->t('Move out date'),
+      '#description' => $this->t('Enter your out date.'),
+    ];
+    $form['prev_rent'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Rent'),
+    ];
+    $form['prev_landloard_name'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Landloard Name'),
+    ];
+    $form['prev_landloard_number'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Landloard phone number'),
+    ];
+    $form['prev_reason'] = [
+      '#type' => 'textarea',
+      '#title' => $this->t('Reason for leaving'),
+    ];
+    $form['prev_address'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Address'),
+    ];
+    $form['prev_city'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('City'),
+    ];
+    $form['prev_state'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('State'),
+    ];
+    $form['prev_zip'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Zip code'),
+    ];
+
+
+    $form['occupation'] = array(
+      '#type' => 'radios',
+      '#title' => $this->t('Occupation'),
+      '#default_value' => 'employed',
+      '#options' => array(
+        'employed' => $this->t('Employed'),
+        'self-employed' => $this->t('Self-employed'),
+        'student' => $this->t('Student'),
+        'unemployed' => $this->t('Unemployed'),
+      ),
+    );
+
+    $form['employer_name'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Employer name'),
+    ];
+    $form['employer_number'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Employer contact number'),
+    ];
+    $form['employment_year'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Years of employment'),
+    ];
+/*Family members info */
+    $i = 0;
+    $family_count = $form_state->get('family_count');
+    $form['#tree'] = TRUE;
+    $form['family_fieldset'] = [
+      '#type' => 'fieldset',
+      '#prefix' => '<div id="family-fieldset-wrapper" class="col-sm-12">',
+      '#suffix' => '</div>',
+    ];
+    if (empty($family_count)) {
+      $family_count = $form_state->set('family_count', 1);
+    }
+
+    for ($i = 0; $i < $family_count; $i++) {
+      $weight = 10*$i;
+      $form['family_fieldset'][$i]['family_member_name'] = [
+        '#type' => 'textfield',
+        '#title' => $this->t('Name'),
+        '#weight' => $weight+1,
+        '#prefix' => '<div class="col-sm-4">',
+        '#suffix' => '</div>',
+      ];
+      $form['family_fieldset'][$i]['family_member_age'] = [
+        '#type' => 'textfield',
+        '#title' => $this->t('Age'),
+        '#weight' => $weight+2,
+        '#prefix' => '<div class="col-sm-4">',
+        '#suffix' => '</div>',
+      ];
+      $form['family_fieldset'][$i]['family_member_rel'] = [
+        '#type' => 'textfield',
+        '#title' => $this->t('Relationship'),
+        '#weight' => $weight+3,
+        '#prefix' => '<div class="col-sm-4">',
+        '#suffix' => '</div>',
+      ];
+    }
+    $form['actions'] = ['#type' => 'actions'];
+
+    $form['family_fieldset']['actions']['add_family'] = [
+      '#type' => 'submit',
+      '#value' => t('Add more'),
+      '#prefix' => '<div class="col-sm-4">',
+      '#suffix' => '</div>',
+      '#submit' => array('::familyaddOne'),
+      '#ajax' => [
+        'callback' => '::familyaddmoreCallback',
+        'wrapper' => 'family-fieldset-wrapper',
+      ],
+    ];
+    if ($family_count > 1) {
+      $form['family_fieldset']['actions']['remove_family'] = [
+        '#type' => 'submit',
+        '#value' => t('Remove'),
+        '#prefix' => '<div class="col-sm-4">',
+        '#suffix' => '</div>',
+        '#submit' => array('::familyremoveCallback'),
+        '#ajax' => [
+          'callback' => '::familyaddmoreCallback',
+          'wrapper' => 'family-fieldset-wrapper',
+        ]
+      ];
+    }   
+
+/*Income info */
+    $j = 0;
+    $income_count = $form_state->get('income_count');
+    $form['#tree'] = TRUE;
+    $form['income_fieldset'] = [
+      '#type' => 'fieldset',
+      '#prefix' => '<div id="income-fieldset-wrapper" class="col-sm-7">',
+      '#suffix' => '</div>',
+    ];
+    if (empty($income_count)) {
+      $income_count = $form_state->set('income_count', 1);
+    }
+
+    for ($j = 0; $j < $income_count; $j++) {
+      $inc_weight = 10*$j;
+      $form['income_fieldset'][$j]['income_source'] = [
+        '#type' => 'textfield',
+        '#title' => $this->t('Source'),
+        '#weight' => $inc_weight+11,
+        '#prefix' => '<div class="col-sm-6">',
+        '#suffix' => '</div>',
+      ];
+      $form['income_fieldset'][$j]['income_value'] = [
+        '#type' => 'textfield',
+        '#title' => $this->t('Amount'),
+        '#weight' => $inc_weight+12,
+        '#prefix' => '<div class="col-sm-6">',
+        '#suffix' => '</div>',
+      ];
+    }
+
+    $form['income_fieldset']['actions']['add_income'] = [
+      '#type' => 'submit',
+      '#value' => t('Add more source'),
+      '#prefix' => '<div class="col-sm-6">',
+      '#suffix' => '</div>',
+      '#submit' => array('::incomeaddOne'),
+      '#ajax' => [
+        'callback' => '::incomeaddmoreCallback',
+        'wrapper' => 'income-fieldset-wrapper',
+      ],
+    ];
+    if ($income_count > 1) {
+      $form['income_fieldset']['actions']['remove_income'] = [
+        '#type' => 'submit',
+        '#value' => t('Remove source'),
+        '#prefix' => '<div class="col-sm-6">',
+        '#suffix' => '</div>',
+        '#submit' => array('::incomeremoveCallback'),
+        '#ajax' => [
+          'callback' => '::incomeaddmoreCallback',
+          'wrapper' => 'income-fieldset-wrapper',
+        ]
+      ];
+    }   
+
+
+    $form['income'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Total monthly income'),
+    ];
+
+/*Referrence info */
+    $k = 0;
+    $ref_count = $form_state->get('ref_count');
+    $form['ref_fieldset'] = [
+      '#type' => 'fieldset',
+      '#prefix' => '<div id="referrence-fieldset-wrapper" class="col-sm-12">',
+      '#suffix' => '</div>',
+    ];
+    if (empty($ref_count)) {
+      $ref_count = $form_state->set('ref_count', 1);
+    }
+
+    for ($k = 0; $k < $ref_count; $k++) {
+      $inc_weight = 10*$k;
+      $form['ref_fieldset'][$k]['ref_name'] = [
+        '#type' => 'textfield',
+        '#title' => $this->t('Full name'),
+        '#prefix' => '<div class="col-sm-3">',
+        '#suffix' => '</div>',
+      ];
+      $form['ref_fieldset'][$k]['ref_relation'] = [
+        '#type' => 'textfield',
+        '#title' => $this->t('Relationship'),
+        '#prefix' => '<div class="col-sm-3">',
+        '#suffix' => '</div>',
+      ];
+      $form['ref_fieldset'][$k]['ref_phone'] = [
+        '#type' => 'textfield',
+        '#title' => $this->t('Phone number'),
+        '#prefix' => '<div class="col-sm-3">',
+        '#suffix' => '</div>',
+      ];
+      $form['ref_fieldset'][$k]['ref_email'] = [
+        '#type' => 'textfield',
+        '#title' => $this->t('Email address'),
+        '#prefix' => '<div class="col-sm-3">',
+        '#suffix' => '</div>',
+      ];
+    }
+
+    $form['ref_fieldset']['actions']['add_ref'] = [
+      '#type' => 'submit',
+      '#value' => t('Add more referrence'),
+      '#prefix' => '<div class="col-sm-4">',
+      '#suffix' => '</div>',
+      '#submit' => array('::refaddOne'),
+      '#ajax' => [
+        'callback' => '::refaddmoreCallback',
+        'wrapper' => 'referrence-fieldset-wrapper',
+      ],
+    ];
+    if ($ref_count > 1) {
+      $form['ref_fieldset']['actions']['remove_ref'] = [
+        '#type' => 'submit',
+        '#value' => t('Remove referrence'),
+        '#prefix' => '<div class="col-sm-4">',
+        '#suffix' => '</div>',
+        '#submit' => array('::refremoveCallback'),
+        '#ajax' => [
+          'callback' => '::refaddmoreCallback',
+          'wrapper' => 'referrence-fieldset-wrapper',
+        ]
+      ];
+    }   
+
+
+    $form['propertyid'] = [
+      '#type' => 'value', 
+      '#value' => $propertyid
+    ];
+    $form['actions']['submit'] = ['#type' => 'submit', '#value' => $this->t('Apply')];
+
+    //$form['#validate'][] = '::validateEmail';
+    }
+    $form['#theme'] = 'apply_form';
+    return $form;
+  }
+
+  /**
+   * Getter method for Form ID.
+   *
+   * The form ID is used in implementations of hook_form_alter() to allow other
+   * modules to alter the render array built by this form controller.  it must
+   * be unique site wide. It normally starts with the providing module's name.
+   *
+   * @return string
+   *   The unique ID of the form defined by this class.
+   */
+  public function getFormId() {
+    return 'apply_property_form';
+  }
+
+/*
+ * Family add more
+*/
+  public function familyaddOne(array &$form, FormStateInterface $form_state) {
+    $family_count = $form_state->get('family_count');
+    $add_button = $family_count + 1;
+    $form_state->set('family_count', $add_button);
+    $form_state->setRebuild();
+  }
+
+  public function familyaddmoreCallback(array &$form, FormStateInterface $form_state) {
+    $family_count = $form_state->get('family_count');
+    return $form['family_fieldset'];
+  }
+
+  public function familyremoveCallback(array &$form, FormStateInterface $form_state) {
+    $family_count = $form_state->get('family_count');
+    if ($family_count > 1) {
+      $remove_button = $family_count - 1;
+      $form_state->set('family_count', $remove_button);
+    }
+   $form_state->setRebuild();
+  }
+
+/*
+ * Income add more
+*/
+  public function incomeaddOne(array &$form, FormStateInterface $form_state) {
+    $income_count = $form_state->get('income_count');
+    $addincome_button = $income_count + 1;
+    $form_state->set('income_count', $addincome_button);
+    $form_state->setRebuild();
+  }
+
+  public function incomeaddmoreCallback(array &$form, FormStateInterface $form_state) {
+    $income_count = $form_state->get('income_count');
+    return $form['income_fieldset'];
+  }
+
+  public function incomeremoveCallback(array &$form, FormStateInterface $form_state) {
+    $income_count = $form_state->get('income_count');
+    if ($income_count > 1) {
+      $removeincome_button = $income_count - 1;
+      $form_state->set('income_count', $removeincome_button);
+    }
+   $form_state->setRebuild();
+  }
+
+/*
+ * Referrence add more
+*/
+  public function refaddOne(array &$form, FormStateInterface $form_state) {
+    $ref_count = $form_state->get('ref_count');
+    $addref_button = $ref_count + 1;
+    $form_state->set('ref_count', $addref_button);
+    $form_state->setRebuild();
+  }
+
+  public function refaddmoreCallback(array &$form, FormStateInterface $form_state) {
+    $ref_count = $form_state->get('ref_count');
+    return $form['ref_fieldset'];
+  }
+
+  public function refremoveCallback(array &$form, FormStateInterface $form_state) {
+    $ref_count = $form_state->get('ref_count');
+    if ($ref_count > 1) {
+      $removeref_button = $ref_count - 1;
+      $form_state->set('ref_count', $removeref_button);
+    }
+   $form_state->setRebuild();
+  }
+
+
+  /**
+   * Implements form validation.
+   *
+   * The validateForm method is the default method called to validate input on
+   * a form.
+   *
+   * @param array $form
+   *   The render array of the currently built form.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   Object describing the current state of the form.
+   */
+  public function validateForm(array &$form, FormStateInterface $form_state) {
+    $f_name = $form_state->getValue('f_name');
+    $l_name = $form_state->getValue('l_name');
+    $email = $form_state->getValue('email');
+    $user_type = $form_state->getValue('user_type');
+    if (strlen($f_name) > 80) {
+      $form_state->setErrorByName('f_name', $this->t('The first name is too long above 80 chasracters.'));
+    }
+    if (strlen($l_name) > 80) {
+      $form_state->setErrorByName('l_name', $this->t('The last name is too long above 80 characters.'));
+    }
+  if (strlen($email) > 200) {
+      $form_state->setErrorByName('email', $this->t('The email id is too long above 200 characters.'));
+    } else if(!valid_email_address($email)){
+      $form_state->setErrorByName('email', $this->t('The email id is not valid.'));
+    }
+  }
+
+
+
+  /**
+   * Sets an error if supplied username has been blocked.
+   */
+/*  public function validateEmail(array &$form, FormStateInterface $form_state) {
+    if (!$form_state->isValueEmpty('email') && user_is_blocked($form_state->getValue('email'))) {
+      // Blocked in user administration.
+      $form_state->setErrorByName('email', $this->t('The username %name has not been activated or is blocked.', ['%name' => $form_state->getValue('email')]));
+    }
+  }*/
+
+
+  /**
+   * Implements a form submit handler.
+   *
+   * The submitForm method is the default method called for any submit elements.
+   *
+   * @param array $form
+   *   The render array of the currently built form.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   Object describing the current state of the form.
+   */
+  public function submitForm(array &$form, FormStateInterface $form_state) {
+    /*
+     * This would normally be replaced by code that actually does something
+     * with the title.
+     */
+    $f_name = $form_state->getValue('f_name');
+    $l_name = $form_state->getValue('l_name');
+    $email = $form_state->getValue('email');
+    $driver_license = $form_state->getValue('driver_license');
+    $birth_date = $form_state->getValue('birth_date');
+    $cell_phone = $form_state->getValue('cell_phone');
+
+    $curr_in_date = $form_state->getValue('curr_in_date');
+    $curr_rent = $form_state->getValue('curr_rent');
+    $curr_landloard_name = $form_state->getValue('curr_landloard_name');
+    $curr_landloard_number = $form_state->getValue('curr_landloard_number');
+    $curr_reason = $form_state->getValue('curr_reason');
+    $curr_address = $form_state->getValue('curr_address');
+    $curr_city = $form_state->getValue('curr_city');
+    $curr_state = $form_state->getValue('curr_state');
+    $curr_zip = $form_state->getValue('curr_zip');
+
+    $prev_in_date = $form_state->getValue('prev_in_date');
+    $prev_out_date = $form_state->getValue('prev_out_date');
+    $prev_rent = $form_state->getValue('prev_rent');
+    $prev_landloard_name = $form_state->getValue('prev_landloard_name');
+    $prev_landloard_number = $form_state->getValue('prev_landloard_number');
+    $prev_reason = $form_state->getValue('prev_reason');
+    $prev_address = $form_state->getValue('prev_address');
+    $prev_city = $form_state->getValue('prev_city');
+    $prev_state = $form_state->getValue('prev_state');
+    $prev_zip = $form_state->getValue('prev_zip');
+
+    $occupation = $form_state->getValue('occupation');
+    $employer_name = $form_state->getValue('employer_name');
+    $employer_number = $form_state->getValue('employer_number');
+    $employment_year = $form_state->getValue('employment_year');
+
+    $family_fieldset = $form_state->getValue('family_fieldset');
+    $income_fieldset = $form_state->getValue('income_fieldset');
+
+    $income = $form_state->getValue('income');
+
+    $ref_fieldset = $form_state->getValue('ref_fieldset');
+    
+    $propertyid = $form_state->getValue('propertyid');
+
+
+    $current_residence = Paragraph::create([
+    'type' => 'residence_info',
+    'field_landlord_name' => $curr_landloard_name,
+    'field_phone_number' => $curr_landloard_number,
+    'field_move_in_date' => $curr_in_date,
+    'field_reason_for_leaving' => $curr_reason,
+    'field_address' => $curr_address,
+    'field_city' => $curr_city,
+    'field_state' => $curr_state,
+    'field_zip' => $curr_zip,
+    'field_rent' => $curr_rent,
+    'field_current_residence' => TRUE,
+    ]);
+    $current_residence->save();
+    $current_residence_id = $current_residence->id();
+
+    $previous_residence = Paragraph::create([
+    'type' => 'residence_info',
+    'field_landlord_name' => $prev_landloard_name,
+    'field_phone_number' => $prev_landloard_number,
+    'field_move_in_date' => $prev_in_date,
+    'field_move_out_date' => $prev_out_date,
+    'field_reason_for_leaving' => $prev_reason,
+    'field_address' => $prev_address,
+    'field_city' => $prev_city,
+    'field_state' => $prev_state,
+    'field_zip' => $prev_zip,
+    'field_rent' => $prev_rent,
+    'field_current_residence' => FALSE,
+    ]);
+    $previous_residence->save();
+    $previous_residence_id = $previous_residence->id();
+
+    $reference = Paragraph::create([
+    'type' => 'reference',
+    'field_full_name' => $ref_name,
+    'field_phone_number' => $ref_phone,
+    'field_relationship' => $ref_relation,
+    'field_address' => $ref_address,
+    ]);
+    $reference->save();
+    $reference_id = $reference->id();
+
+    $term_name = 'Pending';
+    $term = taxonomy_term_load_multiple_by_name($term_name);
+    $term_id = key($term);
+
+    $node = Node::create([
+
+           'type' => 'property_application',
+
+           'title' => 'Property request '.$f_name,
+
+           #'body' => 'Body of the node',
+
+           'field_first_name' => $f_name,
+           'field_last_name' => $l_name,
+           'field_drivers_licence' => $driver_license,
+           'field_email' => $email,
+           'field_birth_date' => $birth_date,
+           'field_phone' => $cell_phone,
+
+           'field_current_occupation' => $occupation,
+           'field_total_monthly_income' => $income,
+           
+           'field_current_residence' => array(
+              array(
+                'target_id' => $current_residence_id,
+                'target_revision_id' => $current_residence->getRevisionId(),
+              ),
+           ),
+           'field_previous_residence' => array(
+              array(
+                'target_id' => $previous_residence_id,
+                'target_revision_id' => $previous_residence->getRevisionId(),
+              ),
+           ),
+           
+           'field_reference'=>  array(
+              array(
+                'target_id' => $reference_id,
+                'target_revision_id' => $reference->getRevisionId(),
+              ),
+           ),
+           'field_property'=> $propertyid,
+           'field_status' => $term_id,
+
+
+           #'field_date'=>[ '2017-07-22', ],
+
+    ]);  
+
+    $node->save();    
+
+    drupal_set_message("Your application is submitted successfully!");
+
+  }
+
+}
+
+
