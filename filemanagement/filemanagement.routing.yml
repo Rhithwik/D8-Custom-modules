@@ -1,0 +1,7 @@
+filemanagement.folder_list_controller:
+  path: '/folders/{userid}'
+  defaults:
+    _title: 'Folders'
+    _controller: '\Drupal\filemanagement\Controller\folderlistController::folders_list'
+  requirements:
+    _permission: 'access content'

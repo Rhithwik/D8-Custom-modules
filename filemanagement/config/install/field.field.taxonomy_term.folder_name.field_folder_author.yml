@@ -1,0 +1,28 @@
+uuid: 2dc9ef10-1be3-4b18-93bb-e171a6e18bde
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_folder_author
+    - taxonomy.vocabulary.folder_name
+id: taxonomy_term.folder_name.field_folder_author
+field_name: field_folder_author
+entity_type: taxonomy_term
+bundle: folder_name
+label: 'Folder Author'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    include_anonymous: true
+    filter:
+      type: _none
+    target_bundles: null
+    sort:
+      field: _none
+    auto_create: false
+field_type: entity_reference

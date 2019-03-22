@@ -1,0 +1,29 @@
+uuid: 5fe3f32d-a2c2-43a9-8c66-e1d26b190c2c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_folder_name
+    - node.type.user_files
+    - taxonomy.vocabulary.folder_name
+id: node.user_files.field_folder_name
+field_name: field_folder_name
+entity_type: node
+bundle: user_files
+label: 'Folder name'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      folder_name: folder_name
+    sort:
+      field: name
+      direction: asc
+    auto_create: true
+    auto_create_bundle: folder_name
+field_type: entity_reference
