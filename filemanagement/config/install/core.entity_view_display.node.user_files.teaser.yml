@@ -1,0 +1,24 @@
+uuid: 4828ff67-234c-4b5c-ba89-7e3b456f98bb
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.user_files.field_file
+    - field.field.node.user_files.field_folder_name
+    - node.type.user_files
+  module:
+    - user
+id: node.user_files.teaser
+targetEntityType: node
+bundle: user_files
+mode: teaser
+content:
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_file: true
+  field_folder_name: true

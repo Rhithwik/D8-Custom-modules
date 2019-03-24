@@ -1,0 +1,14 @@
+name: 'Custom File management'
+description: 'Defines custom content type to create and manage files'
+package: Custom
+type: module
+# core: 8.x
+# version: VERSION
+
+dependencies:
+  - node
+
+version: '8.x-1.1'
+core: '8.x'
+project: 'filemanagement'
+datestamp: 1525039388

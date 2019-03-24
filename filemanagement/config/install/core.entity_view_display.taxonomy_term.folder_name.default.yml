@@ -1,0 +1,30 @@
+uuid: 8d9508cb-5da0-40ab-94a6-0abbfe942e96
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.folder_name.field_folder_author
+    - taxonomy.vocabulary.folder_name
+  module:
+    - text
+id: taxonomy_term.folder_name.default
+targetEntityType: taxonomy_term
+bundle: folder_name
+mode: default
+content:
+  description:
+    label: hidden
+    type: text_default
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_folder_author:
+    weight: 1
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+hidden: {  }
