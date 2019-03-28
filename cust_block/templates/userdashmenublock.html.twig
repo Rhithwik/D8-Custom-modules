@@ -1,0 +1,7 @@
+<div>
+	<ul>
+	  {% for menuitem in dashmenublock %}
+        <li class="{{ menuitem.icon_class}}" ><a href="{{ menuitem.link }}">{{ menuitem.link_title}}</a></li>
+    {% endfor %}
+	</ul>
+</div>

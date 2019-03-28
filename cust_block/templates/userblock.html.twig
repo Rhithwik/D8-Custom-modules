@@ -1,0 +1,7 @@
+<div>
+<div><img src="{{ userdata.picture }}"></div>
+<span>{{ userdata.name }}</span>
+{% if(userdata.edit_link) %}
+<div><a href="{{ userdata.edit_link }}">Edit </a></div>
+{% endif %}
+</div>
