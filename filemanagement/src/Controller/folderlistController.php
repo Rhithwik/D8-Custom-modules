@@ -18,14 +18,15 @@ use Drupal\Core\Controller\ControllerBase;
 			$vid = 'folder_name';
 			$terms =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree($vid);
 			global $base_url;
+			$term_data = NULL;
 			$base_path = $base_url;
 			foreach ($terms as $term) {
 				$authore_ar = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($term->tid)->get('field_folder_author')->getValue();
 				$authors = array_column($authore_ar, 'target_id');
-				if(!in_array($userid, $authors)) {
+				if(in_array($userid, $authors)) {
 					$term_data[] = array(
 						'name' => $term->name,
-						'link' => $base_path.'/folder/'.$term->tid,
+						'link' => $base_path.'/folder/files/'.$term->tid.'?auth='.$userid.'&fname='.$term->name,
 					);
 				}
 			}

@@ -1,8 +1,0 @@
-langcode: en
-status: true
-dependencies: {  }
-name: 'Folder name'
-vid: folder_name
-description: 'name of the folder'
-hierarchy: 0
-weight: 0
