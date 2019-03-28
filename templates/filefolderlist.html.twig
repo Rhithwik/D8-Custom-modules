@@ -1,0 +1,9 @@
+ {{ attach_library('filemanagement/file_listing') }}
+<p>folders: </p>
+
+{% for item in folders %}
+	<a href="{{ item.link }}" class="folder-listing">
+	<span class="folder-img">&nbsp;</span>
+	{{ item.name }}
+	</a>
+{% endfor %}
