@@ -1,0 +1,12 @@
+<?php
+
+/* 
+ * hook_page_attachments_alter
+ */
+function custom_alteration_page_attachments(array &$page) {
+  /* $nid = $variables['node']->id();
+  if($nid == 22) {
+  } */
+    $page['#attached']['library'][] = 'custom_alteration/pvt_msging';
+		//echo '<pre>'; print_r($page); echo '</pre>';
+}

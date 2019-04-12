@@ -1,0 +1,4 @@
+pvt_msging:
+    version: 1.x
+    js:
+        js/pvt_msg.js: {}
