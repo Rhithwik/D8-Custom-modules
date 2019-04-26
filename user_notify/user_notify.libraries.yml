@@ -1,0 +1,5 @@
+user_notify_lib:
+  version: 1.x
+  css:
+    theme:
+        css/notify.css: {}

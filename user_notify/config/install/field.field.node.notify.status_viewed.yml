@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.status_viewed
+    - node.type.notify
+  module:
+    - options
+id: node.notify.status_viewed
+field_name: status_viewed
+entity_type: node
+bundle: notify
+label: 'Status viewed'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: 'no'
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -1,0 +1,8 @@
+use user notification system:
+  title: 'View custom notification'
+  description: 'Allows users to view custom notification'
+
+administer user notification system:
+  title: 'Administer custom notification'
+  description: 'Allows administrators to administer custom notification'
+

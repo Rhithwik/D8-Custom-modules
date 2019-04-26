@@ -1,0 +1,9 @@
+#Notification listing
+user_notify.my_notifications_controller:
+  path: '/my-notifications'
+  defaults:
+    _title: 'Notifications'
+    _controller: '\Drupal\user_notify\Controller\myNotificationsController::myNotificationsPage'
+  requirements:
+    _permission: 'use user notification system'
+    _user_is_logged_in: 'TRUE'
