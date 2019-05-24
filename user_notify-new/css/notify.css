@@ -1,0 +1,18 @@
+/* .viewed-yes{
+  background-color: #f5f5f5;	
+}
+.viewed-no{
+  background-color: #f3dbc7;
+} */
+
+.new {
+  background-color: #fbf1e3;
+}
+
+.created_on {
+	text-align: right;
+}
+
+.notificationlist ul li{
+	border-bottom: 1px solid #f3f3f3;	
+}

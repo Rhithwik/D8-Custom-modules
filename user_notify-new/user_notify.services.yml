@@ -1,0 +1,3 @@
+services:
+ user_notify.notify:
+   class: Drupal\user_notify\CreateNotification

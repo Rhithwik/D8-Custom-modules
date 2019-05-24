@@ -1,0 +1,29 @@
+<?php
+
+/**
+ * Implements hook_cron().
+ */
+function user_notify_cron(){
+	/* $to_user = '1';
+	$title = 'Liked 5';
+	$body = 'Test 5';
+	$notification_service = \Drupal::service('user_notify.notify');
+	$notification_service->send_notification( $to_user, $title, $body);
+	$notification_count = $notification_service->notification_count( $to_user);
+	//echo '<pre>'; print_r($notification_count); echo '</pre>';
+	 $message = 'Notification count:'.$notification_count;
+	\Drupal::logger('user_notify')->notice($message); */
+}
+
+
+/**
+ * Implements hook_theme().
+ */
+function user_notify_theme($existing, $type, $theme, $path) {
+  return [
+    'notificationlist' => [
+      'variables' => ['notifications' => NULL],
+    ],
+  ];
+}
+

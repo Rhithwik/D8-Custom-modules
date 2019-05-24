@@ -1,0 +1,11 @@
+name: 'Custom user notifications'
+description: 'Custom module to generate notifications'
+type: module
+package: Rentstarz Custom modules
+dependencies:
+  - node
+
+version: '8.x'
+core: '8.x'
+project: 'user_notify'
+datestamp: 1498418346

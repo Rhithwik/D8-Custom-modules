@@ -1,0 +1,23 @@
+#Notification listing
+user_notify.my_notifications_controller:
+  path: '/my-notifications'
+  defaults:
+    _title: 'Notifications'
+    _controller: '\Drupal\user_notify\Controller\myNotificationsController::myNotificationsPage'
+  requirements:
+    _permission: 'use user notification system'
+    _user_is_logged_in: 'TRUE'
+
+#Notification deleting
+# user_notify.delete_notifications_controller:
+  # path: '/delete/notifications/{nid}'
+  # defaults:
+    # _title: 'Delete Notifications'
+    # _controller: '\Drupal\user_notify\Controller\delNotificationsController::delNotificationsPage'
+  # options:
+    # parameters:
+      # nid:
+        # type: entity:node
+  # requirements:
+    # _permission: 'use user notification system'
+    # _user_is_logged_in: 'TRUE'
